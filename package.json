@@ -5,7 +5,7 @@
     "main": "./dist/index.js",
     "types": "./dist/index.d.ts",
     "scripts": {
-        "test": "echo \"Error: no test specified\" && exit 1",
+        "test": "tsc -b ./test/ && ava",
         "build": "tsc -b"
     },
     "repository": {
@@ -19,9 +19,14 @@
     },
     "homepage": "https://github.com/zimtsui/kitajs#readme",
     "devDependencies": {
+        "ava": "^2.4.0",
         "typescript": "^3.6.3"
     },
     "dependencies": {
         "@types/node": "^12.7.8"
+    },
+    "ava": {
+        "failWithoutAssertions": false,
+        "verbose": true
     }
 }
