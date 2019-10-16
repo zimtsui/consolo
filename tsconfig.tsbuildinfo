@@ -142,8 +142,8 @@
         "signature": "fa62f1a3d3aa3c847315a341793d8934efbeabc36b607c021b185e17cdad4cfa"
       },
       "./src/level.ts": {
-        "version": "9853e04bc502a08f79aadd422139ca0882afd0c9f2cb7608e1a27333323aadab",
-        "signature": "79bb71219e41c78b6f8613f5fe1e0604806435beda1226b8b99e9b44021feb13"
+        "version": "ae69509a1095db96055853fc3be50082051256430407e8b56ca3c93b256c370a",
+        "signature": "4d1db02815b7cdb5a95fafe82cf6de217c3f289debf856d57d6053d1e0dc58ed"
       },
       "./src/index.ts": {
         "version": "521d74cae975e85992893f1ecca5af767e1dc490774f6ab9678c5ce63b93c1fb",
@@ -1261,6 +1261,7 @@
       "./node_modules/typescript/lib/lib.esnext.intl.d.ts",
       "./node_modules/typescript/lib/lib.esnext.bigint.d.ts",
       "./src/file.ts",
+      "./src/kita.ts",
       "./node_modules/@types/events/index.d.ts",
       "./node_modules/@types/node/globals.d.ts",
       "./node_modules/@types/node/assert.d.ts",
@@ -1308,9 +1309,8 @@
       "./node_modules/@types/node/ts3.2/index.d.ts",
       "./node_modules/@types/minimatch/index.d.ts",
       "./node_modules/@types/glob/index.d.ts",
-      "./src/kita.ts",
-      "./src/index.ts",
-      "./src/level.ts"
+      "./src/level.ts",
+      "./src/index.ts"
     ]
   },
   "version": "3.6.3"

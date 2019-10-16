@@ -10,7 +10,7 @@ const defaultLevels: string[] = [
     'debug',
 ];
 
-interface DefaultObject {
+interface LevelObject {
     level: string;
     data: unknown;
     args: unknown[];
@@ -27,7 +27,7 @@ class LoggerByLevel {
         for (const level of levels)
             Reflect.defineProperty(this, level, {
                 value: function (data: unknown, ...args: unknown[]) {
-                    const object: DefaultObject = {
+                    const object: LevelObject = {
                         level,
                         data,
                         args,
@@ -38,17 +38,18 @@ class LoggerByLevel {
     }
 }
 
-function addMessageInBuiltinFormat(r: DefaultObject) {
+function addMessageInBuiltinFormat(r: LevelObject) {
     r.message = `${util.format(r.data, ...r.args)}\n`;
     return r;
 };
 
 function filterByLevel(allowed: string) {
-    return (r: DefaultObject) => r.level === allowed;
+    return (r: LevelObject) => r.level === allowed;
 }
 
 export {
     LoggerByLevel,
     filterByLevel,
     addMessageInBuiltinFormat,
+    LevelObject,
 }
