@@ -142,8 +142,8 @@
         "signature": "989839ee5027e1d126249664934d1395b7a31f5e1ffa7dc079bbb5f6cb8b25fe"
       },
       "./src/level.ts": {
-        "version": "7ac66c43173badf14c77b514caa94be4ba29a31f80f12af995abf5de9af286fb",
-        "signature": "64a772ab6af265eb2d5713a257dc2cc005654ddf51e351e955297857885513b6"
+        "version": "9e2b7d5eee79b2802a152f480b4eb8d740005c1ddeb20c7033dfe2074a1a6831",
+        "signature": "a36ab8800bdf671e178f5ce4008ad067893eb0f7b81f4e8bfe5d180f54079da2"
       },
       "./src/index.ts": {
         "version": "521d74cae975e85992893f1ecca5af767e1dc490774f6ab9678c5ce63b93c1fb",
@@ -504,8 +504,8 @@
         "./node_modules/@types/node/ts3.2/util.d.ts"
       ],
       "./src/level.ts": [
-        "./src/kita.ts",
         "./node_modules/@types/node/util.d.ts",
+        "./src/kita.ts",
         "./node_modules/@types/node/ts3.2/util.d.ts"
       ],
       "./src/index.ts": [
@@ -933,6 +933,9 @@
       "./src/file.ts": [
         "./node_modules/@types/node/fs.d.ts"
       ],
+      "./src/kita.ts": [
+        "./node_modules/@types/node/stream.d.ts"
+      ],
       "./src/level.ts": [
         "./src/kita.ts"
       ],
@@ -1221,9 +1224,6 @@
         "./node_modules/@types/node/ts3.2/index.d.ts",
         "./node_modules/@types/node/util.d.ts",
         "./node_modules/@types/node/ts3.2/util.d.ts"
-      ],
-      "./src/kita.ts": [
-        "./node_modules/@types/node/stream.d.ts"
       ]
     },
     "semanticDiagnosticsPerFile": [
@@ -1261,6 +1261,8 @@
       "./node_modules/typescript/lib/lib.esnext.intl.d.ts",
       "./node_modules/typescript/lib/lib.esnext.bigint.d.ts",
       "./src/file.ts",
+      "./src/kita.ts",
+      "./src/index.ts",
       "./node_modules/@types/events/index.d.ts",
       "./node_modules/@types/node/globals.d.ts",
       "./node_modules/@types/node/assert.d.ts",
@@ -1308,8 +1310,6 @@
       "./node_modules/@types/node/ts3.2/index.d.ts",
       "./node_modules/@types/minimatch/index.d.ts",
       "./node_modules/@types/glob/index.d.ts",
-      "./src/kita.ts",
-      "./src/index.ts",
       "./src/level.ts"
     ]
   },

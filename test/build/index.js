@@ -14,28 +14,28 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 Object.defineProperty(exports, "__esModule", { value: true });
 const ava_1 = __importDefault(require("ava"));
 const __1 = require("../../");
-const level_1 = require("../../dist/level");
 const file_1 = require("../../dist/file");
 const process_1 = __importDefault(require("process"));
 const events_1 = __importDefault(require("events"));
 ava_1.default.serial('1', (t) => __awaiter(void 0, void 0, void 0, function* () {
     const kita = new __1.Kita();
     const infoLog = kita
-        .pipe(new level_1.FilterByLevel('info'))
+        .pipe(new __1.FilterByLevel('info'))
         .pipe(new __1.Modifier(r => {
         r.timestamp = Date.now();
     }))
+        .pipe(__1.builtinFormatter)
         .pipe(new __1.Finalizer(r => `[${r.timestamp}] ${r.message}\n`))
         .pipe(process_1.default.stdout);
     const jsonLog = kita
-        .pipe(new level_1.FilterByLevel('json'))
-        .pipe(new __1.Finalizer(r => `${JSON.stringify(r.message)}\n`))
+        .pipe(new __1.FilterByLevel('json'))
+        .pipe(new __1.Finalizer(r => `${JSON.stringify(r.data)}\n`))
         .pipe(file_1.createFileStream('./json.log', __dirname));
     const errorLog = kita
-        .pipe(new level_1.FilterByLevel('error'))
-        .pipe(new __1.Finalizer(r => `${r.message.stack}\n`))
+        .pipe(new __1.FilterByLevel('error'))
+        .pipe(new __1.Finalizer(r => `${r.data.stack}\n`))
         .pipe(process_1.default.stderr);
-    const logger = new level_1.LoggerByLevel(kita, [
+    const logger = new __1.LoggerByLevel(kita, [
         'error',
         'json',
         'info',

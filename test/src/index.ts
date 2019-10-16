@@ -3,11 +3,10 @@ import {
     Kita,
     Modifier,
     Finalizer,
-} from '../../';
-import {
     LoggerByLevel,
     FilterByLevel,
-} from '../../dist/level';
+    builtinFormatter,
+} from '../../';
 import { createFileStream } from '../../dist/file';
 import process from 'process';
 import EventEmitter from 'events';
@@ -19,6 +18,7 @@ test.serial('1', async t => {
         .pipe(new Modifier(r => {
             r.timestamp = Date.now();
         }))
+        .pipe(builtinFormatter)
         .pipe(new Finalizer(r =>
             `[${r.timestamp}] ${r.message}\n`))
         .pipe(process.stdout);
@@ -26,13 +26,13 @@ test.serial('1', async t => {
     const jsonLog = kita
         .pipe(new FilterByLevel('json'))
         .pipe(new Finalizer(r =>
-            `${JSON.stringify(r.message)}\n`))
+            `${JSON.stringify(r.data)}\n`))
         .pipe(createFileStream('./json.log', __dirname));
 
     const errorLog = kita
         .pipe(new FilterByLevel('error'))
         .pipe(new Finalizer(r =>
-            `${r.message.stack}\n`))
+            `${r.data.stack}\n`))
         .pipe(process.stderr);
 
     const logger: any = new LoggerByLevel(kita, [
