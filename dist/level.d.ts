@@ -1,9 +1,9 @@
 import { Kita, Filter } from './';
-declare type Level = string;
 declare class LoggerByLevel {
+    [level: string]: (message: unknown) => void;
     constructor(kita: Kita, levels?: string[]);
 }
 declare class FilterByLevel extends Filter {
-    constructor(allowed: Level);
+    constructor(allowed: string);
 }
 export { LoggerByLevel, FilterByLevel, };

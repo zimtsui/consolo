@@ -3,15 +3,16 @@ import {
     Filter,
 } from './';
 
-type Level = string;
-
-const defaultLevels: Level[] = [
+const defaultLevels: string[] = [
     'error',
     'warn',
     'info',
+    'debug',
 ];
 
 class LoggerByLevel {
+    [level: string]: (message: unknown) => void;
+
     constructor(
         kita: Kita,
         levels = defaultLevels,
@@ -29,7 +30,7 @@ class LoggerByLevel {
 }
 
 class FilterByLevel extends Filter {
-    constructor(allowed: Level) {
+    constructor(allowed: string) {
         super(r => r.level === allowed);
     }
 }

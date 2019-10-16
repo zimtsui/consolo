@@ -142,12 +142,8 @@
         "signature": "989839ee5027e1d126249664934d1395b7a31f5e1ffa7dc079bbb5f6cb8b25fe"
       },
       "./src/level.ts": {
-        "version": "36edc4ced2e778e13ff1bfd600a428ad255ad4caa2d14fbe358ff109912c4718",
-        "signature": "b652b8aea81c7f3d4b85f433299aeed1be118cd59bb8c0afcb26d43c0709e149"
-      },
-      "./node_modules/@types/bluebird/index.d.ts": {
-        "version": "3c10804e3bd90aa404eefbc300c362b0ebbd23b34eb03ae592717ac111889f34",
-        "signature": "3c10804e3bd90aa404eefbc300c362b0ebbd23b34eb03ae592717ac111889f34"
+        "version": "6ba4b41a318db93d3b2dda33c2bece2aae424a2713100941fee6da30e48c6d0d",
+        "signature": "0929a325c679e3cb38ace3840294d38abd95a108744e151bf2c315e157b2066f"
       },
       "./node_modules/@types/events/index.d.ts": {
         "version": "400db42c3a46984118bff14260d60cec580057dc1ab4c2d7310beb643e4f5935",
@@ -505,10 +501,6 @@
       ],
       "./src/level.ts": [
         "./src/index.ts",
-        "./node_modules/@types/node/util.d.ts",
-        "./node_modules/@types/node/ts3.2/util.d.ts"
-      ],
-      "./node_modules/@types/bluebird/index.d.ts": [
         "./node_modules/@types/node/util.d.ts",
         "./node_modules/@types/node/ts3.2/util.d.ts"
       ],
@@ -936,10 +928,6 @@
       "./src/level.ts": [
         "./src/index.ts"
       ],
-      "./node_modules/@types/bluebird/index.d.ts": [
-        "./node_modules/@types/node/util.d.ts",
-        "./node_modules/@types/node/ts3.2/util.d.ts"
-      ],
       "./node_modules/@types/events/index.d.ts": [
         "./node_modules/@types/node/util.d.ts",
         "./node_modules/@types/node/ts3.2/util.d.ts"
@@ -1257,8 +1245,7 @@
       "./node_modules/typescript/lib/lib.esnext.intl.d.ts",
       "./node_modules/typescript/lib/lib.esnext.bigint.d.ts",
       "./src/file.ts",
-      "./src/level.ts",
-      "./node_modules/@types/bluebird/index.d.ts",
+      "./src/index.ts",
       "./node_modules/@types/events/index.d.ts",
       "./node_modules/@types/node/globals.d.ts",
       "./node_modules/@types/node/assert.d.ts",
@@ -1306,7 +1293,7 @@
       "./node_modules/@types/node/ts3.2/index.d.ts",
       "./node_modules/@types/minimatch/index.d.ts",
       "./node_modules/@types/glob/index.d.ts",
-      "./src/index.ts"
+      "./src/level.ts"
     ]
   },
   "version": "3.6.3"

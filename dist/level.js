@@ -5,6 +5,7 @@ const defaultLevels = [
     'error',
     'warn',
     'info',
+    'debug',
 ];
 class LoggerByLevel {
     constructor(kita, levels = defaultLevels) {
