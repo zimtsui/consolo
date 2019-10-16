@@ -1,4 +1,6 @@
 /// <reference types="node" />
+export * from './level';
+export * from './file';
 import { Transform } from 'stream';
 declare class ObjectTransform extends Transform {
     constructor();
