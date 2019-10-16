@@ -1,7 +1,7 @@
 import {
     Kita,
     Filter,
-} from './';
+} from './kita';
 
 const defaultLevels: string[] = [
     'error',

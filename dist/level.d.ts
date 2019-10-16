@@ -1,4 +1,4 @@
-import { Kita, Filter } from './';
+import { Kita, Filter } from './kita';
 declare class LoggerByLevel {
     [level: string]: (message: unknown) => void;
     constructor(kita: Kita, levels?: string[]);

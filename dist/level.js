@@ -1,6 +1,6 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-const _1 = require("./");
+const kita_1 = require("./kita");
 const defaultLevels = [
     'error',
     'warn',
@@ -21,7 +21,7 @@ class LoggerByLevel {
     }
 }
 exports.LoggerByLevel = LoggerByLevel;
-class FilterByLevel extends _1.Filter {
+class FilterByLevel extends kita_1.Filter {
     constructor(allowed) {
         super(r => r.level === allowed);
     }
