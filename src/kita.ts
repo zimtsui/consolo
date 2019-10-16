@@ -1,7 +1,6 @@
 import { Transform } from 'stream';
-import util from 'util';
 
-class Kita extends Transform {
+class Kita<TIn, TOut> extends Transform {
     constructor() {
         super({ objectMode: true });
     }
@@ -11,49 +10,48 @@ class Kita extends Transform {
         cb();
     }
 
-    public filter(f: (r: any) => boolean) {
-        return this.pipe(new Filter(f));
+    public filter<TNew extends TOut>(f: (r: TOut) => boolean) {
+        return this.pipe(new Filter<TOut, TNew>(f));
     }
 
-    public modifier(f: (r: any) => unknown) {
-        return this.pipe(new Modifier(f));
+    public modifier<TNew>(f: (r: TOut) => TNew) {
+        return this.pipe(new Modifier<TOut, TNew>(f));
     }
 
-    public finalizer(f: (r: any) => string) {
-        return this.pipe(new Finalizer(f));
+    public finalizer(f: (r: TOut) => string) {
+        return this.pipe(new Finalizer<TOut>(f));
     }
 }
 
-class Filter extends Kita {
-    constructor(private f: (r: unknown) => boolean) {
+class Filter<TIn, TOut extends TIn> extends Kita<TIn, TOut> {
+    constructor(private f: (r: TIn) => boolean) {
         super();
     }
 
-    _transform(r: unknown, encoding: unknown, cb: () => void) {
+    _transform(r: TIn, encoding: unknown, cb: () => void) {
         if (this.f(r)) this.push(r);
         cb();
     }
 }
 
-class Modifier extends Kita {
-    constructor(private f: (r: unknown) => unknown) {
+class Modifier<TIn, TOut> extends Kita<TIn, TOut> {
+    constructor(private f: (r: TIn) => TOut) {
         super();
     }
 
-    _transform(r: unknown, encoding: unknown, cb: () => void) {
-        const newR: unknown = this.f(r)
-        this.push(newR || r);
+    _transform(r: TIn, encoding: unknown, cb: () => void) {
+        this.push(this.f(r));
         cb();
     }
 }
 
-class Finalizer extends Kita {
-    constructor(private f: (r: unknown) => string) {
+class Finalizer<TIn> extends Kita<TIn, string> {
+    constructor(private f: (r: TIn) => string) {
         super();
     }
 
-    _transform(r: unknown, encoding: unknown, cb: () => void) {
-        this.push(util.format(this.f(r)));
+    _transform(r: TIn, encoding: unknown, cb: () => void) {
+        this.push(this.f(r));
         cb();
     }
 }

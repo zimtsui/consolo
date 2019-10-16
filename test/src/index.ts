@@ -1,6 +1,6 @@
 import test from 'ava';
 import {
-    Kita,
+    LevelKita,
     LoggerByLevel,
     createFileStream,
     filterByLevel,
@@ -10,11 +10,12 @@ import process from 'process';
 import EventEmitter from 'events';
 
 test.serial('1', async t => {
-    const kita = new Kita();
+    const kita = new LevelKita();
     const infoLog = kita
         .filter(filterByLevel('info'))
         .modifier(r => {
             r.timestamp = Date.now();
+            return r;
         })
         .modifier(addMessageInBuiltinFormat)
         .finalizer(r =>
@@ -30,14 +31,10 @@ test.serial('1', async t => {
     const errorLog = kita
         .filter(filterByLevel('error'))
         .finalizer(r =>
-            `${r.data.stack}\n`)
+            `${(<Error>r.data).stack}\n`)
         .pipe(process.stderr);
 
-    const logger: any = new LoggerByLevel(kita, [
-        'error',
-        'json',
-        'info',
-    ]);
+    const { logger } = kita;
 
     logger.error(new Error());
     logger.json({ a: 1 });
@@ -47,6 +44,5 @@ test.serial('1', async t => {
     logger.info('xixi');
 
     kita.end();
-
     await EventEmitter.once(jsonLog, 'finish');
 });

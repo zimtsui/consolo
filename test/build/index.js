@@ -17,11 +17,12 @@ const __1 = require("../../");
 const process_1 = __importDefault(require("process"));
 const events_1 = __importDefault(require("events"));
 ava_1.default.serial('1', (t) => __awaiter(void 0, void 0, void 0, function* () {
-    const kita = new __1.Kita();
+    const kita = new __1.LevelKita();
     const infoLog = kita
         .filter(__1.filterByLevel('info'))
         .modifier(r => {
         r.timestamp = Date.now();
+        return r;
     })
         .modifier(__1.addMessageInBuiltinFormat)
         .finalizer(r => `[${r.timestamp}] ${r.message}\n`)
@@ -34,11 +35,7 @@ ava_1.default.serial('1', (t) => __awaiter(void 0, void 0, void 0, function* () 
         .filter(__1.filterByLevel('error'))
         .finalizer(r => `${r.data.stack}\n`)
         .pipe(process_1.default.stderr);
-    const logger = new __1.LoggerByLevel(kita, [
-        'error',
-        'json',
-        'info',
-    ]);
+    const { logger } = kita;
     logger.error(new Error());
     logger.json({ a: 1 });
     logger.info('haha');

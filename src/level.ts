@@ -3,31 +3,29 @@ import {
     Kita,
 } from './kita';
 
-const defaultLevels: string[] = [
-    'error',
-    'warn',
-    'info',
-    'debug',
-];
-
 interface LevelObject {
     [key: string]: any;
     level: string;
-    data: unknown;
-    args: unknown[];
+    data: any;
+    args: any[];
     message?: string;
 }
 
-class LoggerByLevel {
-    [level: string]: (message: unknown) => void;
+class LevelKita extends Kita<LevelObject, LevelObject> {
+    constructor() {
+        super();
+    }
 
-    constructor(
-        kita: Kita,
-        levels = defaultLevels,
-    ) {
-        for (const level of levels)
-            Reflect.defineProperty(this, level, {
-                value: function (data: unknown, ...args: unknown[]) {
+    public logger = new LoggerByLevel(this);
+}
+
+class LoggerByLevel {
+    [level: string]: (data: unknown, ...args: unknown[]) => void;
+
+    constructor(kita: Kita<LevelObject, LevelObject>) {
+        return new Proxy(this, {
+            get: function (target, level: string, receiver) {
+                return function (data: unknown, ...args: unknown[]) {
                     const object: LevelObject = {
                         level,
                         data,
@@ -35,11 +33,12 @@ class LoggerByLevel {
                     };
                     kita.write(object);
                 }
-            });
+            }
+        });
     }
 }
 
-function addMessageInBuiltinFormat(r: LevelObject) {
+function addMessageInBuiltinFormat(r: LevelObject): LevelObject {
     r.message = `${util.format(r.data, ...r.args)}\n`;
     return r;
 };
@@ -48,9 +47,15 @@ function filterByLevel(allowed: string) {
     return (r: LevelObject) => r.level === allowed;
 }
 
+function finalizeWithMessage(r: LevelObject): string {
+    return r.message!;
+}
+
 export {
     LoggerByLevel,
     filterByLevel,
     addMessageInBuiltinFormat,
     LevelObject,
+    finalizeWithMessage,
+    LevelKita,
 }

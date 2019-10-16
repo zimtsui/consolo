@@ -138,12 +138,12 @@
         "signature": "c1377cc03820f0fffce4c77fdb7a4e6557cb47d6ee194f43089a10fff8aaab21"
       },
       "./src/kita.ts": {
-        "version": "fd9267bc03eb9b7f11811e766231fc2ab344087b4cb227312573173ef1396593",
-        "signature": "d9f4b12a8b60f260d15c6d7b06af442b6adf19e3e02d487af0926dbecd7dc6e1"
+        "version": "93f05f88533fb18c011a7b21b76009cb32b3154b8d048dfc1cba0e553741b819",
+        "signature": "4ae0a461c95a21c30cb300dae5f19dd96c617d26a33d8493f1e4c56589bf564a"
       },
       "./src/level.ts": {
-        "version": "6248d8e1fc7a46311adbd424759028f1a767cb35cc0365597e07ebc044297a56",
-        "signature": "f1775a1a5627da30b8188a563683404e2ded0174f56f2a57f3eaaa39da7197ef"
+        "version": "91e75fd9012358f137a43f380d0afccda3b66c571bd72da10ff34f377e2af073",
+        "signature": "4bed755f51b2230c13acc61bcd7f7f60167ef6ce14b5e57108e5035ac2b9a8ff"
       },
       "./src/index.ts": {
         "version": "521d74cae975e85992893f1ecca5af767e1dc490774f6ab9678c5ce63b93c1fb",
@@ -1261,6 +1261,7 @@
       "./node_modules/typescript/lib/lib.esnext.intl.d.ts",
       "./node_modules/typescript/lib/lib.esnext.bigint.d.ts",
       "./src/file.ts",
+      "./src/kita.ts",
       "./node_modules/@types/events/index.d.ts",
       "./node_modules/@types/node/globals.d.ts",
       "./node_modules/@types/node/assert.d.ts",
@@ -1308,9 +1309,8 @@
       "./node_modules/@types/node/ts3.2/index.d.ts",
       "./node_modules/@types/minimatch/index.d.ts",
       "./node_modules/@types/glob/index.d.ts",
-      "./src/kita.ts",
-      "./src/index.ts",
-      "./src/level.ts"
+      "./src/level.ts",
+      "./src/index.ts"
     ]
   },
   "version": "3.6.3"

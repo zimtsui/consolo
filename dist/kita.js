@@ -1,10 +1,6 @@
 "use strict";
-var __importDefault = (this && this.__importDefault) || function (mod) {
-    return (mod && mod.__esModule) ? mod : { "default": mod };
-};
 Object.defineProperty(exports, "__esModule", { value: true });
 const stream_1 = require("stream");
-const util_1 = __importDefault(require("util"));
 class Kita extends stream_1.Transform {
     constructor() {
         super({ objectMode: true });
@@ -42,8 +38,7 @@ class Modifier extends Kita {
         this.f = f;
     }
     _transform(r, encoding, cb) {
-        const newR = this.f(r);
-        this.push(newR || r);
+        this.push(this.f(r));
         cb();
     }
 }
@@ -54,7 +49,7 @@ class Finalizer extends Kita {
         this.f = f;
     }
     _transform(r, encoding, cb) {
-        this.push(util_1.default.format(this.f(r)));
+        this.push(this.f(r));
         cb();
     }
 }
