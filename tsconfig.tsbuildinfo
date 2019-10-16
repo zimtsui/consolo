@@ -138,12 +138,12 @@
         "signature": "c1377cc03820f0fffce4c77fdb7a4e6557cb47d6ee194f43089a10fff8aaab21"
       },
       "./src/kita.ts": {
-        "version": "e5404f80412aa012c5c1f1189eeec867d6b29d6c43ca12923eafb68f99a30e67",
-        "signature": "989839ee5027e1d126249664934d1395b7a31f5e1ffa7dc079bbb5f6cb8b25fe"
+        "version": "226d1b40919f1cb0607f90dbc22046da8f954eed9455d72cb30b18057dd86ad2",
+        "signature": "fa62f1a3d3aa3c847315a341793d8934efbeabc36b607c021b185e17cdad4cfa"
       },
       "./src/level.ts": {
-        "version": "9e2b7d5eee79b2802a152f480b4eb8d740005c1ddeb20c7033dfe2074a1a6831",
-        "signature": "a36ab8800bdf671e178f5ce4008ad067893eb0f7b81f4e8bfe5d180f54079da2"
+        "version": "9853e04bc502a08f79aadd422139ca0882afd0c9f2cb7608e1a27333323aadab",
+        "signature": "79bb71219e41c78b6f8613f5fe1e0604806435beda1226b8b99e9b44021feb13"
       },
       "./src/index.ts": {
         "version": "521d74cae975e85992893f1ecca5af767e1dc490774f6ab9678c5ce63b93c1fb",
@@ -1261,8 +1261,6 @@
       "./node_modules/typescript/lib/lib.esnext.intl.d.ts",
       "./node_modules/typescript/lib/lib.esnext.bigint.d.ts",
       "./src/file.ts",
-      "./src/kita.ts",
-      "./src/index.ts",
       "./node_modules/@types/events/index.d.ts",
       "./node_modules/@types/node/globals.d.ts",
       "./node_modules/@types/node/assert.d.ts",
@@ -1310,6 +1308,8 @@
       "./node_modules/@types/node/ts3.2/index.d.ts",
       "./node_modules/@types/minimatch/index.d.ts",
       "./node_modules/@types/glob/index.d.ts",
+      "./src/kita.ts",
+      "./src/index.ts",
       "./src/level.ts"
     ]
   },

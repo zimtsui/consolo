@@ -1,10 +1,14 @@
-import { Kita, Filter, Modifier } from './kita';
+import { Kita } from './kita';
+interface DefaultObject {
+    level: string;
+    data: unknown;
+    args: unknown[];
+    message?: string;
+}
 declare class LoggerByLevel {
     [level: string]: (message: unknown) => void;
     constructor(kita: Kita, levels?: string[]);
 }
-declare const builtinFormatter: Modifier;
-declare class FilterByLevel extends Filter {
-    constructor(allowed: string);
-}
-export { LoggerByLevel, FilterByLevel, builtinFormatter, };
+declare function addMessageInBuiltinFormat(r: DefaultObject): DefaultObject;
+declare function filterByLevel(allowed: string): (r: DefaultObject) => boolean;
+export { LoggerByLevel, filterByLevel, addMessageInBuiltinFormat, };

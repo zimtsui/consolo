@@ -1,24 +1,30 @@
 import { Transform } from 'stream';
 import util from 'util';
 
-class ObjectTransform extends Transform {
+class Kita extends Transform {
     constructor() {
         super({ objectMode: true });
-    }
-}
-
-class Kita extends ObjectTransform {
-    constructor() {
-        super();
     }
 
     _transform(r: unknown, encoding: unknown, cb: () => void) {
         this.push(r);
         cb();
     }
+
+    public filter(f: (r: any) => boolean) {
+        return this.pipe(new Filter(f));
+    }
+
+    public modifier(f: (r: any) => unknown) {
+        return this.pipe(new Modifier(f));
+    }
+
+    public finalizer(f: (r: any) => string) {
+        return this.pipe(new Finalizer(f));
+    }
 }
 
-class Filter extends ObjectTransform {
+class Filter extends Kita {
     constructor(private f: (r: any) => boolean) {
         super();
     }
@@ -29,7 +35,7 @@ class Filter extends ObjectTransform {
     }
 }
 
-class Modifier extends ObjectTransform {
+class Modifier extends Kita {
     constructor(private f: (r: any) => unknown) {
         super();
     }
@@ -41,7 +47,7 @@ class Modifier extends ObjectTransform {
     }
 }
 
-class Finalizer extends ObjectTransform {
+class Finalizer extends Kita {
     constructor(private f: (r: any) => string) {
         super();
     }

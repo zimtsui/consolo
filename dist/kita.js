@@ -5,22 +5,26 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 Object.defineProperty(exports, "__esModule", { value: true });
 const stream_1 = require("stream");
 const util_1 = __importDefault(require("util"));
-class ObjectTransform extends stream_1.Transform {
+class Kita extends stream_1.Transform {
     constructor() {
         super({ objectMode: true });
-    }
-}
-class Kita extends ObjectTransform {
-    constructor() {
-        super();
     }
     _transform(r, encoding, cb) {
         this.push(r);
         cb();
     }
+    filter(f) {
+        return this.pipe(new Filter(f));
+    }
+    modifier(f) {
+        return this.pipe(new Modifier(f));
+    }
+    finalizer(f) {
+        return this.pipe(new Finalizer(f));
+    }
 }
 exports.Kita = Kita;
-class Filter extends ObjectTransform {
+class Filter extends Kita {
     constructor(f) {
         super();
         this.f = f;
@@ -32,7 +36,7 @@ class Filter extends ObjectTransform {
     }
 }
 exports.Filter = Filter;
-class Modifier extends ObjectTransform {
+class Modifier extends Kita {
     constructor(f) {
         super();
         this.f = f;
@@ -44,7 +48,7 @@ class Modifier extends ObjectTransform {
     }
 }
 exports.Modifier = Modifier;
-class Finalizer extends ObjectTransform {
+class Finalizer extends Kita {
     constructor(f) {
         super();
         this.f = f;

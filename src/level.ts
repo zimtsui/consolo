@@ -1,8 +1,6 @@
 import util from 'util';
 import {
     Kita,
-    Filter,
-    Modifier,
 } from './kita';
 
 const defaultLevels: string[] = [
@@ -11,6 +9,13 @@ const defaultLevels: string[] = [
     'info',
     'debug',
 ];
+
+interface DefaultObject {
+    level: string;
+    data: unknown;
+    args: unknown[];
+    message?: string;
+}
 
 class LoggerByLevel {
     [level: string]: (message: unknown) => void;
@@ -22,28 +27,28 @@ class LoggerByLevel {
         for (const level of levels)
             Reflect.defineProperty(this, level, {
                 value: function (data: unknown, ...args: unknown[]) {
-                    kita.write({
+                    const object: DefaultObject = {
                         level,
                         data,
                         args,
-                    });
+                    };
+                    kita.write(object);
                 }
             });
     }
 }
 
-const builtinFormatter = new Modifier(r => {
-    r.message = util.format(r.data, ...r.args) + '\n';
-});
+function addMessageInBuiltinFormat(r: DefaultObject) {
+    r.message = `${util.format(r.data, ...r.args)}\n`;
+    return r;
+};
 
-class FilterByLevel extends Filter {
-    constructor(allowed: string) {
-        super(r => r.level === allowed);
-    }
+function filterByLevel(allowed: string) {
+    return (r: DefaultObject) => r.level === allowed;
 }
 
 export {
     LoggerByLevel,
-    FilterByLevel,
-    builtinFormatter,
+    filterByLevel,
+    addMessageInBuiltinFormat,
 }

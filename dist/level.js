@@ -4,7 +4,6 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 const util_1 = __importDefault(require("util"));
-const kita_1 = require("./kita");
 const defaultLevels = [
     'error',
     'warn',
@@ -16,24 +15,25 @@ class LoggerByLevel {
         for (const level of levels)
             Reflect.defineProperty(this, level, {
                 value: function (data, ...args) {
-                    kita.write({
+                    const object = {
                         level,
                         data,
                         args,
-                    });
+                    };
+                    kita.write(object);
                 }
             });
     }
 }
 exports.LoggerByLevel = LoggerByLevel;
-const builtinFormatter = new kita_1.Modifier(r => {
-    r.message = util_1.default.format(r.data, ...r.args) + '\n';
-});
-exports.builtinFormatter = builtinFormatter;
-class FilterByLevel extends kita_1.Filter {
-    constructor(allowed) {
-        super(r => r.level === allowed);
-    }
+function addMessageInBuiltinFormat(r) {
+    r.message = `${util_1.default.format(r.data, ...r.args)}\n`;
+    return r;
 }
-exports.FilterByLevel = FilterByLevel;
+exports.addMessageInBuiltinFormat = addMessageInBuiltinFormat;
+;
+function filterByLevel(allowed) {
+    return (r) => r.level === allowed;
+}
+exports.filterByLevel = filterByLevel;
 //# sourceMappingURL=level.js.map

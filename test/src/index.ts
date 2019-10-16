@@ -1,38 +1,36 @@
 import test from 'ava';
 import {
     Kita,
-    Modifier,
-    Finalizer,
     LoggerByLevel,
-    FilterByLevel,
-    builtinFormatter,
+    createFileStream,
+    filterByLevel,
+    addMessageInBuiltinFormat,
 } from '../../';
-import { createFileStream } from '../../dist/file';
 import process from 'process';
 import EventEmitter from 'events';
 
 test.serial('1', async t => {
     const kita = new Kita();
     const infoLog = kita
-        .pipe(new FilterByLevel('info'))
-        .pipe(new Modifier(r => {
+        .filter(filterByLevel('info'))
+        .modifier(r => {
             r.timestamp = Date.now();
-        }))
-        .pipe(builtinFormatter)
-        .pipe(new Finalizer(r =>
-            `[${r.timestamp}] ${r.message}\n`))
+        })
+        .modifier(addMessageInBuiltinFormat)
+        .finalizer(r =>
+            `[${r.timestamp}] ${r.message}\n`)
         .pipe(process.stdout);
 
     const jsonLog = kita
-        .pipe(new FilterByLevel('json'))
-        .pipe(new Finalizer(r =>
-            `${JSON.stringify(r.data)}\n`))
+        .filter(filterByLevel('json'))
+        .finalizer(r =>
+            `${JSON.stringify(r.data)}\n`)
         .pipe(createFileStream('./json.log', __dirname));
 
     const errorLog = kita
-        .pipe(new FilterByLevel('error'))
-        .pipe(new Finalizer(r =>
-            `${r.data.stack}\n`))
+        .filter(filterByLevel('error'))
+        .finalizer(r =>
+            `${r.data.stack}\n`)
         .pipe(process.stderr);
 
     const logger: any = new LoggerByLevel(kita, [
