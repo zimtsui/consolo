@@ -15,10 +15,10 @@ exports.LevelKita = LevelKita;
 class LoggerByLevel {
     constructor(kita) {
         return new Proxy(this, {
-            get: function (target, level, receiver) {
+            get: function (target, field, receiver) {
                 return function (data, ...args) {
                     const object = {
-                        level,
+                        level: field,
                         data,
                         args,
                     };

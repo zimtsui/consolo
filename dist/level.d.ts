@@ -3,7 +3,7 @@ interface LevelObject {
     [key: string]: any;
     level: string;
     data: any;
-    args: any[];
+    args: unknown[];
     message?: string;
 }
 declare class LevelKita extends Kita<LevelObject, LevelObject> {

@@ -7,7 +7,7 @@ interface LevelObject {
     [key: string]: any;
     level: string;
     data: any;
-    args: any[];
+    args: unknown[];
     message?: string;
 }
 
@@ -24,10 +24,10 @@ class LoggerByLevel {
 
     constructor(kita: Kita<LevelObject, LevelObject>) {
         return new Proxy(this, {
-            get: function (target, level: string, receiver) {
+            get: function (target, field, receiver) {
                 return function (data: unknown, ...args: unknown[]) {
                     const object: LevelObject = {
-                        level,
+                        level: <string>field,
                         data,
                         args,
                     };
