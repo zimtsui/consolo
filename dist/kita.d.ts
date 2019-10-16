@@ -9,17 +9,17 @@ declare class Kita extends Transform {
 }
 declare class Filter extends Kita {
     private f;
-    constructor(f: (r: any) => boolean);
+    constructor(f: (r: unknown) => boolean);
     _transform(r: unknown, encoding: unknown, cb: () => void): void;
 }
 declare class Modifier extends Kita {
     private f;
-    constructor(f: (r: any) => unknown);
+    constructor(f: (r: unknown) => unknown);
     _transform(r: unknown, encoding: unknown, cb: () => void): void;
 }
 declare class Finalizer extends Kita {
     private f;
-    constructor(f: (r: any) => string);
+    constructor(f: (r: unknown) => string);
     _transform(r: unknown, encoding: unknown, cb: () => void): void;
 }
 export default Kita;

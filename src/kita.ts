@@ -25,7 +25,7 @@ class Kita extends Transform {
 }
 
 class Filter extends Kita {
-    constructor(private f: (r: any) => boolean) {
+    constructor(private f: (r: unknown) => boolean) {
         super();
     }
 
@@ -36,7 +36,7 @@ class Filter extends Kita {
 }
 
 class Modifier extends Kita {
-    constructor(private f: (r: any) => unknown) {
+    constructor(private f: (r: unknown) => unknown) {
         super();
     }
 
@@ -48,7 +48,7 @@ class Modifier extends Kita {
 }
 
 class Finalizer extends Kita {
-    constructor(private f: (r: any) => string) {
+    constructor(private f: (r: unknown) => string) {
         super();
     }
 
