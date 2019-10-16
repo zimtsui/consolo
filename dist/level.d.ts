@@ -1,5 +1,6 @@
 import { Kita } from './kita';
 interface LevelObject {
+    [key: string]: any;
     level: string;
     data: unknown;
     args: unknown[];

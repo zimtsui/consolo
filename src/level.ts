@@ -11,6 +11,7 @@ const defaultLevels: string[] = [
 ];
 
 interface LevelObject {
+    [key: string]: any;
     level: string;
     data: unknown;
     args: unknown[];
