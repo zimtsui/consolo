@@ -19,7 +19,7 @@
     },
     "homepage": "https://github.com/zimtsui/kitajs#readme",
     "devDependencies": {
-        "ava": "^2.4.0",
+        "ava": "^5.2.0",
         "typescript": "^3.6.3"
     },
     "dependencies": {
